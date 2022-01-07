@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageAttachment } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const API = require('../ValorantAPI');
 const DB = require('../db/userDatabase');
 const util = require('../util/utility');
@@ -30,6 +30,8 @@ module.exports = {
       const matchDetails = await API.getCompHistory("na", data.puuid);
       const matchID = matchDetails.data[0].MatchID;
       const result = await API.getMatchDetails("na", matchID);
+
+      let date = new Date(result.data.matchInfo.gameStartMillis);
       
       const playerDetails =  result.data.players.find(id => id.subject === data.puuid);
       const agentImg = await axios.get(`https://valorant-api.com/v1/agents/${playerDetails.characterId}`);
@@ -43,7 +45,7 @@ module.exports = {
       const matchEmbed = new MessageEmbed()
             .setColor(color)
             .setTitle(`Last Match Stats - ${mapDetails.displayName} - ${win.won === true ? "WIN" : "LOSE"}`)
-            .setDescription(`Score: ${win.roundsWon}-${lostRound}`)
+            .setDescription(`${date.toUTCString()} | Score: ${win.roundsWon}-${lostRound}`)
             .setImage(mapDetails.listViewIcon)
             .setThumbnail(agentImg.data.data.displayIcon)
             .setTimestamp()

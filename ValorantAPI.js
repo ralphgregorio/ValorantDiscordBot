@@ -86,8 +86,8 @@ module.exports = {
         });
         const response = await axios.put('https://auth.riotgames.com/api/v1/authorization', {
             'type': 'auth',
-            'username': process.env.USER,
-            'password': process.env.PASS,
+            'username': process.env.VUSER,
+            'password': process.env.VPASS,
         }, {
             jar: cookieJar,
             withCredentials: true,
@@ -110,7 +110,7 @@ module.exports = {
                 'Authorization': `Bearer ${access_token}`,
             },
         });
-        console.log(`Successfully reauthorized with ${process.env.USER}`);
+        console.log(`Successfully reauthorized with ${process.env.VUSER}`);
         const data = { AUTH_TOKEN: access_token, JWT: response_1.data.entitlements_token };
         fs.writeFile('./config/config.json', JSON.stringify(data), err => {
             if (err) {
