@@ -20,21 +20,6 @@ createEmbed = (rank, vUser) => {
 
 }
 
-createEmbedError = (msg) => {
-    const imgAttach = new MessageAttachment('./rankPictures/null.png');
-        const rankEmbed = new MessageEmbed()
-            .setColor('#0099ff')
-            .setTitle('Exception')
-            .setThumbnail('attachment://null.png')
-            .setTimestamp()
-            .addFields(
-              {name: 'Error try again later', value: msg},
-            );
-        return {embeds: [rankEmbed], files: [imgAttach]};
-
-}
-
-
 
 module.exports = {
   name: "rank",
@@ -53,7 +38,7 @@ module.exports = {
       
       if (args.length == 0){
           const data = await DB.getUser(message.member.user.id);
-          if (data === null) return message.channel.send(createEmbedError(`If you don't have a linked account you must enter as ${prefix}rank name#tagline`));
+          if (data === null) return message.channel.send(util.createEmbedError(`If you don't have a linked account you must enter as ${prefix}rank name#tagline`));
           const rank = await API.getRank("na", data.puuid);
           return message.channel.send(createEmbed(rank, data.val_username));
       }
@@ -64,7 +49,7 @@ module.exports = {
 
       
       const puuid = await API.getPUUID(name, tagline);
-      if (puuid === null) return message.channel.send(createEmbedError(`${name}#${tagline} is not a valid valorant username`));
+      if (puuid === null) return message.channel.send(util.createEmbedError(`${name}#${tagline} is not a valid valorant username`));
       const rank = await API.getRank("na", puuid);
     
     return message.channel.send(createEmbed(rank, name+"#"+tagline));

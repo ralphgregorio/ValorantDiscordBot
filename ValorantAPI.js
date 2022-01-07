@@ -55,7 +55,7 @@ rank_tier = {
 },
 
 module.exports = {
-
+    ranks: rank_tier,
     /**
      * Use external API to get PUUID of given name#tag
      * @param {String} name Player Name
