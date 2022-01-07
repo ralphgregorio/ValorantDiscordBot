@@ -1,1 +1,12 @@
-# valoBotDev
+# Valorant Discord Bot
+
+To use:
+Create .env file with the contents
+```
+USER='VAL_USERNAME'
+PASS='VAL_PASSWORD'
+CLIENT_TOKEN='BOT_TOKEN'
+MONGO_URI='MONGOURI'
+PLATFORM="ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9"
+VERSION="release-03.12-shipping-14-647680"
+```
