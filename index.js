@@ -8,7 +8,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 client.commands = new Collection();
 const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-/*
+
 function authorize() {
   console.log("Reauthorizing bot with private API...")
   API.authorize();
@@ -16,7 +16,6 @@ function authorize() {
 }
 
 authorize();
-*/
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
@@ -28,6 +27,8 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    client.user.setActivity(`${prefix}help`, {type: "WATCHING"})
+
 
 });
 

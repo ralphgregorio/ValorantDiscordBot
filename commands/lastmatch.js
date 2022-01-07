@@ -25,7 +25,7 @@ module.exports = {
       let color = "#00FF00";
       
       const data = await DB.getUser(message.member.user.id);
-      if (data === null) return message.channel.send(createEmbedError(`If you don't have a linked account you must enter as ${prefix}rank name#tagline`));
+      if (data === null) return message.channel.send(util.createEmbedError(`use ${prefix}link command to link your account before using this command`));
       
       const matchDetails = await API.getCompHistory("na", data.puuid);
       const matchID = matchDetails.data[0].MatchID;

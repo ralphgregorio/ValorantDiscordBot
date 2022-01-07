@@ -17,6 +17,7 @@ module.exports = {
   execute: async (message, args, client) => {
     console.log(`${message.member.user.tag} ran help command`)
 
+    try {
     const { commands } = message.client;
 
     if (!args.length) {
@@ -67,5 +68,10 @@ module.exports = {
     }
 
     return message.channel.send({ embeds: [cmdHelpEmbed] });
+  }
+  catch (err) {
+    console.log({msg: "Error running help command.", err: err})
+    return message.channel.send(util.createEmbedError("Try again later"));
+  }
   },
 };

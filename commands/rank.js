@@ -35,6 +35,8 @@ module.exports = {
   execute: async (message, args, client) => {
 
     console.log(`${message.member.user.tag} ran rank command`)
+
+    try {
       
       if (args.length == 0){
           const data = await DB.getUser(message.member.user.id);
@@ -53,5 +55,10 @@ module.exports = {
       const rank = await API.getRank("na", puuid);
     
     return message.channel.send(createEmbed(rank, name+"#"+tagline));
+    }
+    catch(err){
+      console.log({msg: "Error running rank command.", err: err})
+      return message.channel.send(util.createEmbedError("Try again later"));
+    }
   },
 };
