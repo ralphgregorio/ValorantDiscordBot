@@ -22,6 +22,8 @@ module.exports = {
     console.log(`${message.member.user.tag} ran lastmatch command`)
 
     try {
+      message.channel.sendTyping();
+      
       let color = "#00FF00";
       
       const data = await DB.getUser(message.member.user.id);
