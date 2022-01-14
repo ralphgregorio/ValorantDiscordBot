@@ -3,7 +3,6 @@ const axios = require('axios').default;
 const axiosCookieJarSupport = require('axios-cookiejar-support').default;
 const tough = require('tough-cookie');
 const querystring = require('querystring');
-const configs = require('./config/config.json');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
@@ -11,15 +10,17 @@ axiosCookieJarSupport(axios);
 
 
 createRequest = (url, method, data='') => {
+    let rawConfig = fs.readFileSync(path.join(__dirname,'/config/config.json'));
+    let config_tokens = JSON.parse(rawConfig);
     var data = data;
     var config = {
     method: method,
     url: url,
     headers: { 
-        'X-Riot-Entitlements-JWT': `${configs.JWT}`, 
+        'X-Riot-Entitlements-JWT': `${config_tokens.JWT}`, 
         'X-Riot-ClientPlatform': `${process.env.PLATFORM}`, 
         'X-Riot-ClientVersion': `${process.env.VERSION}`, 
-        'Authorization': `Bearer ${configs.AUTH_TOKEN}`
+        'Authorization': `Bearer ${config_tokens.AUTH_TOKEN}`
     },
     data : data
     };
@@ -115,10 +116,11 @@ module.exports = {
         const date = new Date();
         const data = { "TIME": date.toLocaleTimeString(), AUTH_TOKEN: access_token, JWT: response_1.data.entitlements_token };
         fs.writeFile(path.join(__dirname, '/config/config.json'), JSON.stringify(data), err => {
+            let date = new Date();
             if (err) {
-                console.log("Failed to assign new JWT and Auth Token");
+                console.log(date.toLocaleTimeString() + ": Failed to assign new JWT and Auth Token");
             } else {
-                console.log("Successfully assigned new JWT and Auth Token");
+                console.log(date.toLocaleTimeString() + " : Successfully assigned new JWT and Auth Token");
             }
         });
     },

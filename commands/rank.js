@@ -37,6 +37,8 @@ module.exports = {
     console.log(`${message.member.user.tag} ran rank command`)
 
     try {
+
+      message.channel.sendTyping();
       
       if (args.length == 0){
           const data = await DB.getUser(message.member.user.id);
