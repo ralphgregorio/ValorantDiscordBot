@@ -12,7 +12,7 @@ const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('
 function authorize() {
   console.log("Reauthorizing bot with private API...")
   API.authorize();
-  setTimeout(authorize,3600000)
+  setTimeout(authorize,30000)
 }
 
 authorize();

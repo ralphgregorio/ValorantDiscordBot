@@ -5,6 +5,7 @@ const tough = require('tough-cookie');
 const querystring = require('querystring');
 const configs = require('./config/config.json');
 const fs = require('fs');
+const path = require('path');
 const url = require('url');
 axiosCookieJarSupport(axios);
 
@@ -111,8 +112,9 @@ module.exports = {
             },
         });
         console.log(`Successfully reauthorized with ${process.env.VUSER}`);
-        const data = { AUTH_TOKEN: access_token, JWT: response_1.data.entitlements_token };
-        fs.writeFile('./config/config.json', JSON.stringify(data), err => {
+        const date = new Date();
+        const data = { "TIME": date.toLocaleTimeString(), AUTH_TOKEN: access_token, JWT: response_1.data.entitlements_token };
+        fs.writeFile(path.join(__dirname, '/config/config.json'), JSON.stringify(data), err => {
             if (err) {
                 console.log("Failed to assign new JWT and Auth Token");
             } else {
