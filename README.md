@@ -4,7 +4,6 @@ Uses Valorant in-game API to get rank and match information
 
 This bot only needs one login information to grab rank and match information from any valorant users.
 
-Thanks to [techchrism](https://github.com/techchrism/valorant-api-docs), [Henrik-3](https://github.com/Henrik-3/unofficial-valorant-api), and [liamcottle](https://github.com/liamcottle/valorant.js) for their docs and code for using the in-game API.
 ## To use:
 Create .env file with the contents. Uses MongoDB Atlas
 ```
